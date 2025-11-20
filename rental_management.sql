@@ -127,52 +127,6 @@ CREATE TABLE ServiceRequest (
 );
 
 -- ------------------------------
--- AmenityUsage Table
--- ------------------------------
-CREATE TABLE AmenityUsage (
-    UsageID INT AUTO_INCREMENT PRIMARY KEY,
-    Date DATE,
-    Cost DECIMAL(10, 2),
-    Status VARCHAR(50),
-    TenantID INT,
-    FOREIGN KEY (TenantID)
-        REFERENCES Tenant(TenantID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
-
--- ------------------------------
--- AmenityType Table
--- ------------------------------
-CREATE TABLE AmenityType (
-    AmenityTypeID INT AUTO_INCREMENT PRIMARY KEY,
-    Laundry BOOLEAN,
-    Meal BOOLEAN,
-    Parking BOOLEAN,
-    UsageID INT,
-    FOREIGN KEY (UsageID)
-        REFERENCES AmenityUsage(UsageID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
-
--- ------------------------------
--- Invoice Table
--- ------------------------------
-CREATE TABLE Invoice (
-    InvoiceID INT AUTO_INCREMENT PRIMARY KEY,
-    Month VARCHAR(20),
-    Amount DECIMAL(10, 2),
-    PaymentStatus VARCHAR(50),
-    DateGenerated DATE,
-    TenantID INT,
-    FOREIGN KEY (TenantID)
-        REFERENCES Tenant(TenantID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
-
--- ------------------------------
 -- Feedback Table
 -- ------------------------------
 CREATE TABLE Feedback (
@@ -201,24 +155,6 @@ BEGIN
     SET NEW.FeedbackNo = next_no;
 END //
 DELIMITER ;
--- ------------------------------
--- RoomAssignmentHistory Table
--- ------------------------------
-CREATE TABLE RoomAssignmentHistory (
-    AssignmentID INT AUTO_INCREMENT PRIMARY KEY,
-    CheckInDate DATE,
-    CheckOutDate DATE,
-    RoomID INT,
-    TenantID INT,
-    FOREIGN KEY (RoomID)
-        REFERENCES Room(RoomID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE,
-    FOREIGN KEY (TenantID)
-        REFERENCES Tenant(TenantID)
-        ON DELETE CASCADE
-        ON UPDATE CASCADE
-);
 
 -- ------------------------------
 -- Tenant_Email Table
