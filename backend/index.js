@@ -28,6 +28,27 @@ app.get("/test-db", async (req, res) => {
     }
 });
 
+// Root route
+app.get("/", (req, res) => {
+    res.json({
+        message: "Rental Management System API",
+        status: "running",
+        version: "1.0.0",
+        endpoints: {
+            health: "/health",
+            testDb: "/test-db",
+            owners: "/Owner",
+            properties: "/Property",
+            rooms: "/Room",
+            tenants: "/Tenant",
+            staff: "/Staff",
+            payments: "/Payment",
+            serviceRequests: "/ServiceRequest",
+            feedback: "/Feedback"
+        }
+    });
+});
+
 // Health check endpoint for Railway
 app.get("/health", (req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
