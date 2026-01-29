@@ -14,6 +14,18 @@ const db = mysql.createConnection({
     database: "rental_management"
 });
 
+const pool = require("./config/db");
+
+app.get("/test-db", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SHOW TABLES");
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 db.connect(err => {
     if (err) {
         console.error("DB connection error:", err);
